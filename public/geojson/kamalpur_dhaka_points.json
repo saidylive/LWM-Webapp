@@ -1,0 +1,15 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.86648650818287,25.27786637559842]},"properties":{"Place":"Dhanua Kamalpur","ID":1,"Code":"FF01, FF02","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.86906306592923,25.18450190522977]},"properties":{"Place":"Bakhshiganj","ID":4,"Code":"FF05","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.94954901630736,24.917887581825383]},"properties":{"Place":"Jamalpur","ID":7,"Code":"FF08, FF12, FF13","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.95140791134628,24.677823796977123]},"properties":{"Place":"Dhanbari","ID":11,"Code":"","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.91698802222356,24.25039245653088]},"properties":{"Place":"Tangail","ID":12,"Code":"FF14","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[90.40830490209315,23.886466304687247]},"properties":{"Place":"Tongi","ID":13,"Code":"","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[90.41865038811706,23.720649979630046]},"properties":{"Place":"Dhaka","ID":14,"Code":"","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[90.01711539265543,25.014771025209757]},"properties":{"Place":"Sherpur","ID":6,"Code":"FF07, FF11","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.92644842017255,24.763358574004364]},"properties":{"Place":"Digpait","ID":10,"Code":"","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.90189189606357,25.175670754267887]},"properties":{"Place":"Khosalpur","ID":2,"Code":"FF03","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.87818033525252,25.156468149721697]},"properties":{"Place":"Jankipur","ID":3,"Code":"FF04","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.92222533375092,25.0487416106546]},"properties":{"Place":"Bagher Char","ID":5,"Code":"FF06","Date":""}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.9451053597722,24.869398848083573]},"properties":{"Place":"Mollapara","ID":9,"Code":"FF10","Date":""}}
+]}
