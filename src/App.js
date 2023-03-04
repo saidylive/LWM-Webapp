@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import {Container} from '@mui/material';
 import {
   MapContainer,
@@ -21,24 +21,108 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import EventData from './data/Events';
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow
 });
 
+let SmallIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [3, 5]
+});
+
 L.Marker.prototype.options.icon = DefaultIcon;
 
 
 function App() {
+  const [map, setMap] = useState(null)
+  const [markerPosition, setMarkerPosition] = useState([0, 0])
+  const [marker, setMarker] = useState(null)
+  const [showAnimation, setShowAnimation] = useState(true)
   const [sectorBoundary, setSectorBoundary] = useState()
   const [kamalpurDhakaRoute, setKamalpurDhakaRoute] = useState()
   const [kamalpurDhakaPoints, setKamalpurDhakaPoints] = useState()
+  const [eventPos, setEventPos] = useState(0)
   const center = [23.777176, 90.399452]
-  const rectangle = [
-    [51.49, -0.08],
-    [51.5, -0.06],
-  ]
+
+  const changeEvent = () => {
+    let pos = eventPos + 1
+    if (pos >= EventData.length) {
+      pos = 0
+    }
+    const currentEvent = EventData[pos]
+    console.log("eventPos", pos)
+    const code = currentEvent.Code
+    let coordinates = null
+    if (kamalpurDhakaPoints) {
+      const tfs = kamalpurDhakaPoints.features.filter(item => item.properties.Code.indexOf(code) >= 0)
+      const feature = tfs[0]
+      if (feature) {
+        coordinates = feature.geometry.coordinates
+        const cr0 = coordinates[0]
+        const cr1 = coordinates[1]
+        coordinates = [cr1, cr0]
+        setMarkerPosition(coordinates)
+        console.log("coordinates", coordinates)
+      }
+    }
+    setEventPos(pos)
+    if (markerPosition) {
+      if (map) {
+        map.flyTo(markerPosition, 9)
+      }
+      if (marker) {
+        marker.openPopup()
+      }
+    }
+  }
+
+  const renderCurrentEvent = () => {
+    const ev = EventData[eventPos]
+    return <table className='table-events'>
+      <tr>
+        <th>Place</th>
+        <td>:</td>
+        <td>{ev.Place}</td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td>:</td>
+        <td>{ev.Date}</td>
+      </tr>
+      <tr>
+        <th>Target</th>
+        <td>:</td>
+        <td>{ev.Target}</td>
+      </tr>
+      <tr>
+        <th>Event</th>
+        <td>:</td>
+        <td>{ev.Event}</td>
+      </tr>
+      <tr>
+        <th>Team</th>
+        <td>:</td>
+        <td>{ev.Team}</td>
+      </tr>
+      <tr>
+        <th>Pak. Leader</th>
+        <td>:</td>
+        <td>{ev.PakLeader}</td>
+      </tr>
+    </table>
+  }
+
+  const handleEachFeature = (feature, layer) => {
+    layer.on({
+      click: (e) => {
+        // setFeatureId(feature.properties.cartodb_id);
+      }
+    });
+  };
 
   useEffect(() => {
     if (!sectorBoundary) {
@@ -79,8 +163,13 @@ function App() {
     }
   }, [kamalpurDhakaPoints])
 
+  useEffect(() => {
+    const id = setInterval(changeEvent, 5000);
+    return () => clearInterval(id);
+  }, [eventPos])
+
   return (
-    <MapContainer center={center} zoom={8} scrollWheelZoom={true}>
+    <MapContainer ref={setMap} center={center} zoom={8} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -94,7 +183,7 @@ function App() {
 
         {kamalpurDhakaRoute ?
           <LayersControl.Overlay checked name="Dhaka-Kamalpur Route">
-            <GeoJSON data={kamalpurDhakaRoute} style={{color: 'blue'}} />
+            <GeoJSON data={kamalpurDhakaRoute} style={{ color: 'blue' }} />
           </LayersControl.Overlay>
           : null}
 
@@ -102,49 +191,20 @@ function App() {
           <LayersControl.Overlay checked name="Dhaka-Kamalpur Points">
             <GeoJSON
               data={kamalpurDhakaPoints}
+              onEachFeature={handleEachFeature}
               pointToLayer={(feature, latlng) => {
-                return L.circleMarker(latlng, {radius: 4, color: 'red', fill: true, fillColor: 'red', fillOpacity: 0.8})
+                return L.circleMarker(latlng, { radius: 4, color: 'red', fill: true, fillColor: 'red', fillOpacity: 0.8 })
               }}
             />
           </LayersControl.Overlay>
           : null}
 
-        <LayersControl.Overlay name="Marker with popup">
-          <Marker position={center}>
+        <LayersControl.Overlay checked name="Marker with popup">
+          <Marker ref={setMarker} position={markerPosition} icon={SmallIcon}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              {renderCurrentEvent()}
             </Popup>
           </Marker>
-        </LayersControl.Overlay>
-
-        <LayersControl.Overlay name="Layer group with circles">
-          <LayerGroup>
-            <Circle
-              center={center}
-              pathOptions={{ fillColor: 'blue' }}
-              radius={200}
-            />
-            <Circle
-              center={center}
-              pathOptions={{ fillColor: 'red' }}
-              radius={100}
-              stroke={false}
-            />
-            <LayerGroup>
-              <Circle
-                center={[51.51, -0.08]}
-                pathOptions={{ color: 'green', fillColor: 'green' }}
-                radius={100}
-              />
-            </LayerGroup>
-          </LayerGroup>
-        </LayersControl.Overlay>
-        <LayersControl.Overlay name="Feature group">
-          <FeatureGroup pathOptions={{ color: 'purple' }}>
-            <Popup>Popup in FeatureGroup</Popup>
-            <Circle center={[51.51, -0.06]} radius={200} />
-            <Rectangle bounds={rectangle} />
-          </FeatureGroup>
         </LayersControl.Overlay>
       </LayersControl>
     </MapContainer>
