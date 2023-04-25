@@ -1,0 +1,10 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.94946,24.92672]},"properties":{"Name":"Chapatola Ghat","Lat":24.92672,"Long":89.94946}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.96621,24.92202]},"properties":{"Name":"Jamalpur Shashanghat","Lat":24.92202,"Long":89.96621}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.94919,24.92753]},"properties":{"Name":"Ashok Mahmud College Hostel","Lat":24.92753,"Long":89.94919}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.92958,24.92936]},"properties":{"Name":"Fouti Graveyard","Lat":24.92936,"Long":89.92958}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.95084,24.91042]},"properties":{"Name":"PTI","Lat":24.91042,"Long":89.95084}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.95039,24.91117]},"properties":{"Name":"Water Development Board","Lat":24.91117,"Long":89.95039}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.89925,24.94979]},"properties":{"Name":"River/ Ferry Ghat,  Bridge","Lat":24.94979,"Long":89.89925}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[89.8995,24.94933]},"properties":{"Name":"Beltia Graveyard","Lat":24.94933,"Long":89.8995}}
+]}

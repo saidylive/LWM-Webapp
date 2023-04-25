@@ -1,4 +1,4 @@
-export default [
+const eventData = [
     {
         "Code": "FF01",
         "Place": "Kamalpur",
@@ -30,13 +30,13 @@ export default [
         "Date": "4 December, 1971",
         "Target": "To Block Bakshiganj-Jamalpur Road",
         "Event": "-Made outflanking move and established a road block.",
-        "Team": "Freedom Fighters&nbsp;"
+        "Team": "Freedom Fighters"
     },
     {
         "Code": "FF05",
         "Place": "Bakshiganj",
         "Date": "5 December, 1971",
-        "Event": "-Pak Army pulled out of Bakshiganj&nbsp;",
+        "Event": "-Pak Army pulled out of Bakshiganj",
         "Time": "At night"
     },
     {
@@ -44,23 +44,23 @@ export default [
         "Place": "Bagher Char",
         "Date": "6 December, 1971",
         "Target": "To cross Brahmaputra",
-        "Event": "-Pakistanis blowed up a bridge after a resolute fight&nbsp;"
+        "Event": "-Pakistanis blowed up a bridge after a resolute fight"
     },
     {
         "Code": "FF07",
         "Place": "Sherpur",
         "Date": "6 December, 1971",
         "Target": "To raise Bangladesh flag at newly liberated Sherpur",
-        "Event": "-Area Commander Captain Abdul Aziz raised Bangladesh flag&nbsp;",
+        "Event": "-Area Commander Captain Abdul Aziz raised Bangladesh flag",
         "Team Leader": "Captain Abdul Aziz"
     },
     {
         "Code": "FF08",
         "Place": "Jamalpur",
         "Date": "7 December, 1971",
-        "Target": "To cross the Brahmaputra&nbsp;",
-        "Event": "-The allied forces and freedom fighters both crossed the Brahmaputra together.&nbsp;",
-        "Time": "At nightfall&nbsp;",
+        "Target": "To cross the Brahmaputra",
+        "Event": "-The allied forces and freedom fighters both crossed the Brahmaputra together.",
+        "Time": "At nightfall",
         "Team": "Allied Forces, Freedom Fighters"
     },
     {
@@ -68,14 +68,14 @@ export default [
         "Place": "Bapli",
         "Date": "7 December, 1971",
         "Event": "-Established base at Bapli, Southeast Jamalpur",
-        "Time": "2:30 AM&nbsp;",
+        "Time": "2:30 AM",
         "Column11": "Not Found"
     },
     {
         "Code": "FF10",
         "Place": "Mollapara",
-        "Date": "8\/9 December, 1971",
-        "Target": "To cut Jamalpur-Tangail Road&nbsp;",
+        "Date": "8/9 December, 1971",
+        "Target": "To cut Jamalpur-Tangail Road",
         "Event": "-Established a road block",
         "Time": "At night"
     },
@@ -97,11 +97,11 @@ export default [
         "Target": "To free Jamalpur",
         "Event": "-A heavy attack started with 2 air attack",
         "Team": "Allied Forces, Freedom Fighters",
-        "PakLeader": "Major Fazle Akbar&nbsp;"
+        "PakLeader": "Major Fazle Akbar"
     },
     {
         "Code": "FF13",
-        "Place": "Jamalpur&nbsp;",
+        "Place": "Jamalpur",
         "Date": "11 December, 1971",
         "Target": "To accept formal surrender",
         "Event": "-General Nagra accept the formal surrender of Jamalpur Garrison",
@@ -114,3 +114,5 @@ export default [
         "Date": "11 December, 1971"
     }
 ]
+
+export default eventData
