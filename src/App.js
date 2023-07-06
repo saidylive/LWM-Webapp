@@ -20,6 +20,9 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import EventData from './data/Events';
 import EventGallery from './data/EventGallery';
 import GallerySlider from './components/gallery_slider';
+import { arcgisToGeoJSON } from '@esri/arcgis-to-geojson-utils';
+// import { geojsonToArcGIS } from '@esri/arcgis-to-geojson-utils';
+
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -45,6 +48,9 @@ function App() {
   const [kamalpurDhakaRoute, setKamalpurDhakaRoute] = useState()
   const [kamalpurDhakaPoints, setKamalpurDhakaPoints] = useState()
   const [killingSitePoints, setKillingSitePoints] = useState()
+  const [battlefields, setBattlefields] = useState()
+  const [dist71, setDistrict71] = useState()
+  const [dist21, setDistrict21] = useState()
   const [currentGalleryItems, setCurrentGalleryItems] = useState([])
   const [eventPos, setEventPos] = useState(0)
   const center = [23.777176, 90.399452]
@@ -157,7 +163,7 @@ function App() {
         .then((res) => {
           // console.log(res)
           if (res.status === 200) {
-            setSectorBoundary(res.data)
+            setSectorBoundary(arcgisToGeoJSON(res.data))
           }
         })
         .catch()
@@ -202,6 +208,42 @@ function App() {
         .catch()
     }
   }, [killingSitePoints])
+
+  useEffect(() => {
+    if (!battlefields) {
+      axios.get("geojson/Battlefields.json")
+        .then((res) => {
+          if (res.status === 200) {
+            setBattlefields(arcgisToGeoJSON(res.data))
+          }
+        })
+        .catch()
+    }
+  }, [battlefields])
+
+  useEffect(() => {
+    if (!dist71) {
+      axios.get("geojson/Dist_1971.json")
+        .then((res) => {
+          if (res.status === 200) {
+            setDistrict71(arcgisToGeoJSON(res.data))
+          }
+        })
+        .catch()
+    }
+  }, [dist71])
+
+  useEffect(() => {
+    if (!dist21) {
+      axios.get("geojson/64Dist2021.json")
+        .then((res) => {
+          if (res.status === 200) {
+            setDistrict21(arcgisToGeoJSON(res.data))
+          }
+        })
+        .catch()
+    }
+  }, [dist21])
 
   useEffect(() => {
     const id = setInterval(changeEvent, 5000);
@@ -269,6 +311,26 @@ function App() {
             />
           </LayersControl.Overlay>
           : null}
+
+        {battlefields ?
+          <LayersControl.Overlay name="Battle Fields">
+            <GeoJSON data={battlefields} />
+          </LayersControl.Overlay>
+          : null}
+
+        {dist71 ?
+          <LayersControl.Overlay name="Districts in 1971">
+            <GeoJSON data={dist71} />
+          </LayersControl.Overlay>
+          : null}
+        {/* 
+        {dist21 ?
+          <LayersControl.Overlay name="Districts in 2021">
+            <GeoJSON data={dist21} />
+          </LayersControl.Overlay>
+          : null} */}
+
+
 
         <LayersControl.Overlay checked name={AUTO_SLIDER_NAME}>
           <Marker ref={setMarker} position={markerPosition} icon={SmallIcon}>
