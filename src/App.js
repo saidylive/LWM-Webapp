@@ -157,18 +157,18 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    if (!sectorBoundary) {
-      axios.get("geojson/Sector_Bnd.json")
-        .then((res) => {
-          // console.log(res)
-          if (res.status === 200) {
-            setSectorBoundary(arcgisToGeoJSON(res.data))
-          }
-        })
-        .catch()
-    }
-  }, [sectorBoundary])
+  // useEffect(() => {
+  //   if (!sectorBoundary) {
+  //     axios.get("geojson/Sector_Bnd.json")
+  //       .then((res) => {
+  //         // console.log(res)
+  //         if (res.status === 200) {
+  //           setSectorBoundary(arcgisToGeoJSON(res.data))
+  //         }
+  //       })
+  //       .catch()
+  //   }
+  // }, [sectorBoundary])
 
   useEffect(() => {
     if (!kamalpurDhakaRoute) {
